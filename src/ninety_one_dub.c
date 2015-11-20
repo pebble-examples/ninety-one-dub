@@ -52,11 +52,7 @@ static void set_container_image(GBitmap **bmp_image, BitmapLayer *bmp_layer, con
   GBitmap *old_image = *bmp_image;
 
   *bmp_image = gbitmap_create_with_resource(resource_id);
-#ifdef PBL_PLATFORM_BASALT
   GRect bitmap_bounds = gbitmap_get_bounds((*bmp_image));
-#else
-  GRect bitmap_bounds = (*bmp_image)->bounds;
-#endif
   GRect frame = GRect(origin.x, origin.y, bitmap_bounds.size.w, bitmap_bounds.size.h);
   bitmap_layer_set_bitmap(bmp_layer, *bmp_image);
   layer_set_frame(bitmap_layer_get_layer(bmp_layer), frame);
@@ -118,11 +114,7 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, bitmap_layer_get_layer(s_background_layer));
 
   s_meter_bar_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_METER_BAR);
-#ifdef PBL_PLATFORM_BASALT
   GRect bitmap_bounds = gbitmap_get_bounds(s_meter_bar_bitmap);
-#else
-  GRect bitmap_bounds = s_meter_bar_bitmap->bounds;
-#endif
   GRect frame = GRect(17, 43, bitmap_bounds.size.w, bitmap_bounds.size.h);
   s_meter_bar_layer = bitmap_layer_create(frame);
   bitmap_layer_set_bitmap(s_meter_bar_layer, s_meter_bar_bitmap);
@@ -130,11 +122,7 @@ static void main_window_load(Window *window) {
 
   if (!clock_is_24h_style()) {
     s_time_format_bitmap = gbitmap_create_with_resource(RESOURCE_ID_IMAGE_24_HOUR_MODE);
-#ifdef PBL_PLATFORM_BASALT
     bitmap_bounds = gbitmap_get_bounds(s_time_format_bitmap);
-#else
-    bitmap_bounds = s_time_format_bitmap->bounds;
-#endif
     GRect frame = GRect(17, 68, bitmap_bounds.size.w, bitmap_bounds.size.h);
     s_time_format_layer = bitmap_layer_create(frame);
     bitmap_layer_set_bitmap(s_time_format_layer, s_time_format_bitmap);
